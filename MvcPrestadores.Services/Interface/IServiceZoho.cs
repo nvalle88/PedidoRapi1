@@ -1,8 +1,8 @@
-﻿using MvcPrestadores.Entity.DTO;
+﻿using MvcPedidos.Entity.DTO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MvcPrestadores.Services.Interface
+namespace MvcPedidos.Services.Interface
 {
     public interface IServiceZoho
     {

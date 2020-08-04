@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace Saludsa.Utilidades
+namespace Utilidades
 {
 
     /// <summary>

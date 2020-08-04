@@ -1,8 +1,8 @@
-﻿using MvcPrestadores.Services.Interface;
+﻿using MvcPedidos.Services.Interface;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace MvcPrestadores.Web.Controllers
+namespace MvcPedidos.Web.Controllers
 {
     public class VentasController : Controller
     {

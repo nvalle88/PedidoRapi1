@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPrestadores.Services", "MvcPrestadores.Services\MvcPrestadores.Services.csproj", "{1B068D98-CF45-421E-B937-AD8F1554AA46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPedidos.Services", "MvcPrestadores.Services\MvcPedidos.Services.csproj", "{1B068D98-CF45-421E-B937-AD8F1554AA46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPrestadores.Entity", "MvcPrestadores.Entity\MvcPrestadores.Entity.csproj", "{9CF55FBC-CEB6-4FAC-A3E4-98589599F0E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPedidos.Entity", "MvcPrestadores.Entity\MvcPedidos.Entity.csproj", "{9CF55FBC-CEB6-4FAC-A3E4-98589599F0E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPrestadores.Web", "MvcPrestadores.Web\MvcPrestadores.Web.csproj", "{887582BC-9BC5-4BEB-BD01-6A527C13BDAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPedidos.Web", "MvcPrestadores.Web\MvcPedidos.Web.csproj", "{887582BC-9BC5-4BEB-BD01-6A527C13BDAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilidades", "Utilidades\Utilidades.csproj", "{917E7623-4471-4C93-8733-E5F5D513ACF9}"
 EndProject

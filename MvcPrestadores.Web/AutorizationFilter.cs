@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 
-namespace MvcPrestadores.Web
+namespace MvcPedidos.Web
 {
     public class AutorizationFilter : IActionFilter
     {

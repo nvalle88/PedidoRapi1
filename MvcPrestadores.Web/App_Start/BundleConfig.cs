@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace MvcPrestadores.Web
+namespace MvcPedidos.Web
 {
     public class BundleConfig
     {

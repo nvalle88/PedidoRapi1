@@ -5,10 +5,10 @@ using Ninject.Web.Common.WebHost;
 using System;
 using System.Web;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MvcPrestadores.Web.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MvcPrestadores.Web.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(MvcPedidos.Web.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(MvcPedidos.Web.NinjectWebCommon), "Stop")]
 
-namespace MvcPrestadores.Web
+namespace MvcPedidos.Web
 {
     public class NinjectWebCommon
     {

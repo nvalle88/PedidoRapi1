@@ -1992,13 +1992,13 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcPrestadores.Entity\MvcPrestadores.Entity.csproj">
+    <ProjectReference Include="..\MvcPrestadores.Entity\MvcPedidos.Entity.csproj">
       <Project>{9cf55fbc-ceb6-4fac-a3e4-98589599f0e8}</Project>
-      <Name>MvcPrestadores.Entity</Name>
+      <Name>MvcPedidos.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcPrestadores.Services\MvcPrestadores.Services.csproj">
+    <ProjectReference Include="..\MvcPrestadores.Services\MvcPedidos.Services.csproj">
       <Project>{1b068d98-cf45-421e-b937-ad8f1554aa46}</Project>
-      <Name>MvcPrestadores.Services</Name>
+      <Name>MvcPedidos.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utilidades\Utilidades.csproj">
       <Project>{917E7623-4471-4C93-8733-E5F5D513ACF9}</Project>

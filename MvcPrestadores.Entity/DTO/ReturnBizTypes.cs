@@ -1,4 +1,4 @@
-﻿namespace MvcPrestadores.Entity.DTO
+﻿namespace MvcPedidos.Entity.DTO
 {
     public class ReturnBizTypes
     {

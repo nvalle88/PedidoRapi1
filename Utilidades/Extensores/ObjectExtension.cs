@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 
-namespace Saludsa.Utilidades.Extensores
+namespace Utilidades.Extensores
 {
     public static class ObjectExtension
     {

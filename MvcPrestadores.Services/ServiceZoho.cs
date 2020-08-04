@@ -1,7 +1,5 @@
-﻿using MvcPrestadores.Entity.DTO;
-using MvcPrestadores.Services.Interface;
-using Saludsa.Utilidades;
-using Saludsa.Utilidades.Extensores;
+﻿using MvcPedidos.Entity.DTO;
+using MvcPedidos.Services.Interface;
 using Saludsa.UtilidadesRest;
 using System;
 using System.Collections.Generic;
@@ -11,8 +9,10 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using Utilidades;
+using Utilidades.Extensores;
 
-namespace MvcPrestadores.Services
+namespace MvcPedidos.Services
 {
     public class ServiceZoho : IServiceZoho
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 
-namespace MvcPrestadores.Services
+namespace MvcPedidos.Services
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {

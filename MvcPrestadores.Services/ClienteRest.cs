@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace MvcPrestadores.Services
+namespace MvcPedidos.Services
 {
     public static class ClienteRest
     {

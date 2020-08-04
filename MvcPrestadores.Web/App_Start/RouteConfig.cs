@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MvcPrestadores.Web
+namespace MvcPedidos.Web
 {
     public class RouteConfig
     {

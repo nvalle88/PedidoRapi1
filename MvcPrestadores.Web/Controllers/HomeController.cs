@@ -1,8 +1,6 @@
-﻿using MvcPrestadores.Services.Interface;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace MvcPrestadores.Web.Controllers
+namespace MvcPedidos.Web.Controllers
 {
     public class HomeController : Controller
     {

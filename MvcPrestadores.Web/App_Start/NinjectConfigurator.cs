@@ -1,15 +1,15 @@
-﻿using MvcPrestadores.Services;
-using MvcPrestadores.Services.Interface;
+﻿using MvcPedidos.Services;
+using MvcPedidos.Services.Interface;
 using Ninject;
 using Ninject.Syntax;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace MvcPrestadores.Web
+namespace MvcPedidos.Web
 {
     public class NinjectConfigurator
     {
-        private static HttpClient _webApiClient; // added
+        //private static HttpClient _webApiClient; // added
         public void Configure(IKernel container)
         {
 

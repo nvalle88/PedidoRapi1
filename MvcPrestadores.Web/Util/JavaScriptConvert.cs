@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System.IO;
 using System.Web;
 
-namespace MvcPrestadores.Web.Util
+namespace MvcPedidos.Web.Util
 {
     public static class JavaScriptConvert
     {
