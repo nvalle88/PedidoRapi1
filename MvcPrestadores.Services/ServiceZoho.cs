@@ -1,6 +1,5 @@
 ﻿using MvcPedidos.Entity.DTO;
 using MvcPedidos.Services.Interface;
-using Saludsa.UtilidadesRest;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -54,13 +53,13 @@ namespace MvcPedidos.Services
                         LoggerBase.WriteLog(GetType().ToString(),
                             $"{idLog} - Exception: ({respuesta.Serializar()})",
                             TypeError.Error);
-                        throw new ExcepcionNegocio("Error interno del servidor");
+                        throw new Exception("Error interno del servidor");
 
                     default:
                         LoggerBase.WriteLog(GetType().ToString(),
                             $"{idLog} - Exception: ({respuesta.Serializar()})",
                             TypeError.Error);
-                        throw new ExcepcionNegocio("No se puede obtener respuesta del servicio");
+                        throw new Exception("No se puede obtener respuesta del servicio");
                 }
             }
             catch (Exception e)
@@ -68,7 +67,7 @@ namespace MvcPedidos.Services
                 LoggerBase.WriteLog(GetType().ToString(),
                     $"{idLog} - Exception: ({e?.Message})",
                     TypeError.Error);
-                throw new ExcepcionNegocio("Error interno del servidor");
+                throw new Exception("Error interno del servidor");
             }
         }
 

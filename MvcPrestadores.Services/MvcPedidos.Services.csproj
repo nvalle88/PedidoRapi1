@@ -37,9 +37,8 @@
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\lib\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\lib\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
@@ -78,8 +77,6 @@
     <Reference Include="System.Web.Http.Owin, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\lib\Microsoft.AspNet.WebApi.Owin.5.2.4\lib\net45\System.Web.Http.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=3.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -87,17 +84,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UtilidadesRest, Version=1.5.8.1, Culture=neutral, PublicKeyToken=b28c39a42145c4a6, processorArchitecture=MSIL">
-      <HintPath>..\..\lib\UtilidadesRest.1.5.8.1\lib\net461\UtilidadesRest.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClienteRest.cs" />
-    <Compile Include="Connected Services\SigmepOda\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Interface\IServiceZoho.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -110,46 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.ObtenerOrdenesAtencionParaPagoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.ObtenerOrdenesAtencionPorCodigoContratoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.ObtenerOrdenesAtencionPorNumeroPrestadorResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.ObtenerOrdenesAtencionRedSaludResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.ObtenerOrdenesPagoRedSaludResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.OrdenAtencion.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.OrdenPago.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.RespuestaCrearOda.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\MvcPrestadores.Services.SigmepOda.ValoresConsultaMedica.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\SigmepOda\ServicioOrdenesAtencion.wsdl" />
-    <None Include="Connected Services\SigmepOda\ServicioOrdenesAtencion.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SigmepOda\ServicioOrdenesAtencion1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SigmepOda\ServicioOrdenesAtencion2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SigmepOda\ServicioOrdenesAtencion3.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -169,21 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\SigmepOda\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SigmepOda\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SigmepOda\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\SigmepOda\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
