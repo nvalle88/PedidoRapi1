@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServicioOrdenesAtencion" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Saludsa.EntidadesTerceros" />
+      <xsd:import schemaLocation="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioOrdenesAtencion_GuardarAutorizacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarAutorizacion" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_GuardarAutorizacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarAutorizacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_GuardarAutorizacionContactCenter_InputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarAutorizacionContactCenter" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_GuardarAutorizacionContactCenter_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarAutorizacionContactCenterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_CambiarEstadoOda_InputMessage">
+    <wsdl:part name="parameters" element="tns:CambiarEstadoOda" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_CambiarEstadoOda_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CambiarEstadoOdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_CambiarDiagnosticoOda_InputMessage">
+    <wsdl:part name="parameters" element="tns:CambiarDiagnosticoOda" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_CambiarDiagnosticoOda_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CambiarDiagnosticoOdaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerTokenConfirmacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTokenConfirmacion" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerTokenConfirmacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTokenConfirmacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesAtencionPorCodigoContrato_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesAtencionPorCodigoContrato" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesAtencionPorCodigoContrato_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesAtencionPorCodigoContratoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesAtencionPorNumeroPrestador_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesAtencionPorNumeroPrestador" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesAtencionPorNumeroPrestador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesAtencionPorNumeroPrestadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesAtencionRedSalud_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesAtencionRedSalud" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesAtencionRedSalud_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesAtencionRedSaludResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesAtencionParaPago_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesAtencionParaPago" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesAtencionParaPago_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesAtencionParaPagoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesPagoRedSalud_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesPagoRedSalud" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerOrdenesPagoRedSalud_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrdenesPagoRedSaludResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerValoresConsulta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerValoresConsulta" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerValoresConsulta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerValoresConsultaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerUrlOda_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUrlOda" />
+  </wsdl:message>
+  <wsdl:message name="IServicioOrdenesAtencion_ObtenerUrlOda_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUrlOdaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioOrdenesAtencion">
+    <wsdl:operation name="GuardarAutorizacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/GuardarAutorizacion" message="tns:IServicioOrdenesAtencion_GuardarAutorizacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/GuardarAutorizacionResponse" message="tns:IServicioOrdenesAtencion_GuardarAutorizacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GuardarAutorizacionContactCenter">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/GuardarAutorizacionContactCenter" message="tns:IServicioOrdenesAtencion_GuardarAutorizacionContactCenter_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/GuardarAutorizacionContactCenterResponse" message="tns:IServicioOrdenesAtencion_GuardarAutorizacionContactCenter_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CambiarEstadoOda">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/CambiarEstadoOda" message="tns:IServicioOrdenesAtencion_CambiarEstadoOda_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/CambiarEstadoOdaResponse" message="tns:IServicioOrdenesAtencion_CambiarEstadoOda_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CambiarDiagnosticoOda">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/CambiarDiagnosticoOda" message="tns:IServicioOrdenesAtencion_CambiarDiagnosticoOda_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/CambiarDiagnosticoOdaResponse" message="tns:IServicioOrdenesAtencion_CambiarDiagnosticoOda_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTokenConfirmacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerTokenConfirmacion" message="tns:IServicioOrdenesAtencion_ObtenerTokenConfirmacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerTokenConfirmacionResponse" message="tns:IServicioOrdenesAtencion_ObtenerTokenConfirmacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesAtencionPorCodigoContrato">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionPorCodigoContrato" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesAtencionPorCodigoContrato_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionPorCodigoContratoResponse" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesAtencionPorCodigoContrato_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesAtencionPorNumeroPrestador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionPorNumeroPrestador" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesAtencionPorNumeroPrestador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionPorNumeroPrestadorResponse" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesAtencionPorNumeroPrestador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesAtencionRedSalud">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionRedSalud" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesAtencionRedSalud_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionRedSaludResponse" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesAtencionRedSalud_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesAtencionParaPago">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionParaPago" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesAtencionParaPago_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionParaPagoResponse" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesAtencionParaPago_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesPagoRedSalud">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesPagoRedSalud" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesPagoRedSalud_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesPagoRedSaludResponse" message="tns:IServicioOrdenesAtencion_ObtenerOrdenesPagoRedSalud_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerValoresConsulta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerValoresConsulta" message="tns:IServicioOrdenesAtencion_ObtenerValoresConsulta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerValoresConsultaResponse" message="tns:IServicioOrdenesAtencion_ObtenerValoresConsulta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUrlOda">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerUrlOda" message="tns:IServicioOrdenesAtencion_ObtenerUrlOda_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioOrdenesAtencion/ObtenerUrlOdaResponse" message="tns:IServicioOrdenesAtencion_ObtenerUrlOda_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicioOrdenesAtencion" type="tns:IServicioOrdenesAtencion">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GuardarAutorizacion">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/GuardarAutorizacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GuardarAutorizacionContactCenter">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/GuardarAutorizacionContactCenter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambiarEstadoOda">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/CambiarEstadoOda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CambiarDiagnosticoOda">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/CambiarDiagnosticoOda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTokenConfirmacion">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/ObtenerTokenConfirmacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesAtencionPorCodigoContrato">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionPorCodigoContrato" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesAtencionPorNumeroPrestador">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionPorNumeroPrestador" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesAtencionRedSalud">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionRedSalud" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesAtencionParaPago">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesAtencionParaPago" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrdenesPagoRedSalud">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/ObtenerOrdenesPagoRedSalud" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerValoresConsulta">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/ObtenerValoresConsulta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUrlOda">
+      <soap:operation soapAction="http://tempuri.org/IServicioOrdenesAtencion/ObtenerUrlOda" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicioOrdenesAtencion">
+    <wsdl:port name="BasicHttpBinding_IServicioOrdenesAtencion" binding="tns:BasicHttpBinding_IServicioOrdenesAtencion">
+      <soap:address location="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ac9d42c9-b8f9-4baa-8eab-e0b39f45e7d2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServicioOrdenesAtencion.xsd" MetadataType="Schema" ID="f4119045-c78d-4ebd-ba9c-5abdea717f72" SourceId="1" SourceUrl="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServicioOrdenesAtencion1.xsd" MetadataType="Schema" ID="4b122c3b-ef18-4f67-b836-e1f4dbe56f28" SourceId="1" SourceUrl="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServicioOrdenesAtencion2.xsd" MetadataType="Schema" ID="4fd4e012-85f0-4a97-9038-cadc4f2702a0" SourceId="1" SourceUrl="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServicioOrdenesAtencion3.xsd" MetadataType="Schema" ID="6928c449-66d3-4741-b870-b91ffda529c6" SourceId="1" SourceUrl="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServicioOrdenesAtencion.wsdl" MetadataType="Wsdl" ID="a018823d-8833-4495-9b55-044886e900e2" SourceId="1" SourceUrl="http://pruebas.saludsapersonas.com/WebServiceMoviles/ServicioOrdenesAtencion.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
