@@ -4,11 +4,21 @@ namespace MvcPedidos.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-          return  RedirectToAction("Index","Ventas");
+            if (string.IsNullOrWhiteSpace(id))
+                return RedirectToAction("Error", "Home", new { titleError = "Petición incorrecta", message = "La petición no ha sido enviada correctamente" });
+
+            System.Web.HttpContext.Current.Session["idCustomerSession"] = id;
+            System.Web.HttpContext.Current.Session.Timeout = 2160;
+            return RedirectToAction("Index", "Ventas");
         }
 
-       
+        public ActionResult Error(string titleError, string message)
+        {
+            ViewBag.TitleError = titleError;
+            ViewBag.Message = message;
+            return View();
+        }
     }
 }

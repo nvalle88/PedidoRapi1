@@ -86,7 +86,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClienteRest.cs" />
     <Compile Include="Interface\IServiceZoho.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

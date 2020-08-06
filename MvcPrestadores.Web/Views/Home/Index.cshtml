@@ -1,127 +1,19 @@
-﻿@model List<MvcPrestadores.Entity.DTO.ReturnBizTypes>
+﻿
 
-.@{
-    ViewBag.Title = "Ejemplo";
+@{
+    ViewBag.Title = "Inicio";
 }
-
-    <div class="container">
-
-        <div class="row">
-            <div data-bind="template: { foreach: listBizTypes, as: 'biz' }">
-                <br />
-                <div class="col-md-8" data-bind=" click:$root.getSpecialities">
-                    <div class="card mb-6">
-                        <div class="card-body">
-                            <br />
-                            <h5 class="card-title text-lg-center bold" style="font-size:12px;"><span data-bind="text:biz.bizName"></span></h5>
-                            <img width="64px" height="64px" data-bind="attr:{src: biz.bizImage}" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div data-bind=" visible: showPanelSpecialities()">
-            <div class="card with-scroll data-table-container">
-                <div class="card-body">
-                    
-                    <br />
-                    <div class="row borderCir">
-                        <div class="col-md-12 padingRow">
-
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" scope="col"><b>Identificaci&oacute;n</b></th>
-                                        <th class="text-center" scope="col"><b>Usuario</b></th>
-                                        <th class="text-center" scope="col"><b>N&uacute;mero <br /> de <br /> convenio</b></th>
-                                      
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="template: { foreach: listSpecialities, as: 'speciality' }">
-                                    <tr>
-                                        <td class="text-center" data-bind="text: speciality.specialityName"></td>
-                                        <td class="text-center" data-bind="text: speciality.specialityDescription"></td>
-                                        <td class="text-center"><img width="64px" height="64px" data-bind="attr:{src: speciality.specialityImageUrl}" /></td>
-                                       
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        @*<div data-bind="visible: showPanelSpecialities()">
-            <div class="row">
-                <div data-bind="template: { foreach: listSpecialities, as: 'speciality' }">
-                    <div class="col-md-8">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <br />
-                                <h5 class="card-title text-lg-center bold" style="font-size:12px;"><span data-bind="text:speciality.specialityName"></span></h5>
-                                <h5 class="card-title text-lg-center bold" style="font-size:12px;"><span data-bind="text:speciality.specialityName"></span></h5>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-    </div>
-
+<div class="container">
+    <p>En estos momentos no podemos procesar su solicitud, gracias</p>
+    <span class="fa fa-wifi"></span>
+</div>
 @section Scripts {
     <script>
         var viewModel = new ViewModel();
         function ViewModel() {
-
             var self = this;
-
-            var lista = @Html.Raw(Json.Encode(Model));
-
             self.loadingData = ko.observable(false);
-
-            self.listBizTypes = ko.observableArray(lista);
-
-            self.listSpecialities = ko.observableArray([]);
-
-            self.showPanelSpecialities = ko.observable(false);
-
-
-
-            self.getSpecialities = function (bizType) {
-
-                var myUrl = '@Url.Action("GetSpecialities", "Home")';
-                self.loadingData(true);
-                $.ajax({
-                    type: "GET",
-                    url: myUrl + '?idBizType=' + bizType.idBizType,
-                    contentType: "application/json; charset=utf-8",
-                    datatype: "json",
-                    success: function (data) {
-                        self.listSpecialities(data);
-                        self.showPanelSpecialities(true);
-                        self.loadingData(false);
-                    },
-                    error: function () {
-                        self.loadingData(false);
-                        self.showPanelSpecialities(false);
-                        self.listSpecialities([]);
-                        alert("No se encontró datos");
-
-                    }
-                });
-
-            }
-
         }
-
         ko.applyBindings(viewModel);
-
-
     </script>
 }

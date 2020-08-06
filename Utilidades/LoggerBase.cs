@@ -42,6 +42,11 @@ namespace Utilidades
 
         public static readonly string ApiGetSpecialities;
 
+        public static readonly string ApiGetItemsByVendor;
+
+        public static readonly string ApiGetVendorsBySpecialityAndCustomer;
+
+
         #endregion
 
         #region Constructor
@@ -53,6 +58,8 @@ namespace Utilidades
                 UrlBase = System.Configuration.ConfigurationManager.AppSettings["UrlBase"];
                 ApiGetBizTypes = System.Configuration.ConfigurationManager.AppSettings["ApiGetBizTypes"];
                 ApiGetSpecialities = System.Configuration.ConfigurationManager.AppSettings["ApiGetSpecialities"];
+                ApiGetItemsByVendor = System.Configuration.ConfigurationManager.AppSettings["ApiGetItemsByVendor"];
+                ApiGetVendorsBySpecialityAndCustomer = System.Configuration.ConfigurationManager.AppSettings["ApiGetVendorsBySpecialityAndCustomer"];
 
                 var number = System.Configuration.ConfigurationManager.AppSettings["TryCallService"];
 

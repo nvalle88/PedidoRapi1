@@ -4,63 +4,101 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style type="text/css">
+    .list-group {
+        max-height: 500px;
+        margin-bottom: 10px;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
 
-<div>
-    <div class="row">
+    .selectedPanel:hover {
+        border: 1px solid #8d8d8d;
+        cursor: pointer;
+    }
+
+    .returnArrow:hover {
+        color:blue;
+        cursor: pointer;
+    }
+    
+</style>
+
+<div class="row col-sm-12">
+    <div class="list-group col-sm-2"">
         <div data-bind="template: { foreach: listBizTypes, as: 'biz' }">
-            <br />
-            <div class="col-md-2" data-bind=" click:$root.getSpecialities">
-                <div class="card mb-8">
+
+            <a href="#" class="list-group-item list-group-item-action" data-bind="click:$root.getSpecialities">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><span data-bind="text:biz.bizName"></span></h5>
+                </div>
+                <img width="64px" height="64px" data-bind="attr:{src: biz.bizImage}" />
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-sm-10" data-bind="visible: showPanelSpecialities()">
+        <div class="row">
+            <!-- ko foreach: listSpecialities -->
+            <div class="col-sm-6 ">
+                <div class="card col-sm-12 selectedPanel" data-bind="click:$root.GetVendorsBySpecialityAndCustomer">
                     <div class="card-body">
-                        <br />
-                        <h5 class="card-title text-lg-center bold" style="font-size:12px;"><span data-bind="text:biz.bizName"></span></h5>
-                        <img width="64px" height="64px" data-bind="attr:{src: biz.bizImage}" />
+                        <div class="row">
+                            <div class="col-sm-3 align-left">
+                                <span class="text-center"><img width="80px" height="80px" data-bind="attr:{src: specialityImageUrl}" /></span>
+                            </div>
+                            <div class="col-sm-9 align-left">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><b><span data-bind="text: specialityName"></span></b></h5>
+                                </div>
+                                <hr />
+                                <p class="mb-1"><span class="text-center" data-bind="text: specialityDescription"></span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
 
 
-    <div data-bind=" visible: showPanelSpecialities()">
-        <div class="card with-scroll data-table-container">
-            <div class="card-body">
+    <div class="col-sm-10" data-bind="visible: showPanelVendors()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="returnArrow" data-bind="click: returnGetSpecialities"><p><span class="fa fa-arrow-left">&emsp;</span><b><span data-bind="text:SpecialitySelected().specialityName"></span></b> - <span data-bind="text: SpecialitySelected().specialityDescription"></span></p></div>
+            </div>
+            <hr />
+        </div>
 
-                <br />
-                <div class="row borderCir">
-                    <div class="col-md-12 padingRow">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" scope="col"><b>Identificaci&oacute;n</b></th>
-                                    <th class="text-center" scope="col"><b>Usuario</b></th>
-                                    <th class="text-center" scope="col"><b>N&uacute;mero <br /> de <br /> convenio</b></th>
-
-                                </tr>
-                            </thead>
-                            <tbody data-bind="template: { foreach: listSpecialities, as: 'speciality' }">
-                                <tr>
-                                    <td class="text-center" data-bind="text: speciality.specialityName"></td>
-                                    <td class="text-center" data-bind="text: speciality.specialityDescription"></td>
-                                    <td class="text-center"><img width="64px" height="64px" data-bind="attr:{src: speciality.specialityImageUrl}" /></td>
-
-                                </tr>
-                            </tbody>
-                        </table>
+        <div class="row">
+            <!-- ko foreach: listVendors -->
+            <div class="col-sm-4 ">
+                <div class="card col-sm-12 selectedPanel" data-bind="click:$root.GetVendorsBySpecialityAndCustomer">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 align-left">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><b><span data-bind="text: VendorName"></span></b></h5>
+                                </div>
+                                <hr />
+                                <p class="mb-1"><span class="text-center" data-bind="text: DeliveryCost"></span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
 
-    hola
 </div>
-
-
 
 @section Scripts {
     <script>
+
+
         var viewModel = new ViewModel();
 
         function ViewModel() {
@@ -71,13 +109,25 @@
 
             var lista = @Html.Raw(Json.Encode(Model));
 
+            self.online = ko.observable(true);
+
+            self.offline = ko.observable(false);
+
             self.listBizTypes = ko.observableArray(lista);
+
+            self.BizTypesSelected = ko.observable({});
+
+            self.listVendors = ko.observableArray([]);
+
+            self.showPanelVendors = ko.observable(false);
 
             self.listSpecialities = ko.observableArray([]);
 
             self.showPanelSpecialities = ko.observable(false);
 
-             self.getSpecialities = function (biz) {
+            self.SpecialitySelected = ko.observable({});
+
+            self.getSpecialities = function (biz) {
 
                 var myUrl = '@Url.Action("GetSpecialities", "Ventas")';
                 self.loadingData(true);
@@ -88,25 +138,79 @@
                     datatype: "json",
                     success: function (data) {
                         self.listSpecialities(data.bizTypes);
-                        var d = self.listSpecialities();
                         self.showPanelSpecialities(true);
+                        self.showPanelVendors(false);
+                        self.BizTypesSelected(biz);
                         self.loadingData(false);
                     },
                     error: function () {
                         self.loadingData(false);
                         self.showPanelSpecialities(false);
+                        self.showPanelVendors(false);
                         self.listSpecialities([]);
                         alert("No se encontró datos");
-
                     }
                 });
+            }
 
+            self.returnGetSpecialities = function () {
+
+                var myUrl = '@Url.Action("GetSpecialities", "Ventas")';
+                self.loadingData(true);
+                var biz=self.BizTypesSelected();
+                $.ajax({
+                    type: "GET",
+                    url: myUrl + '?idBizType=' + biz.idBizType,
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                        self.listSpecialities(data.bizTypes);
+                        self.showPanelSpecialities(true);
+                        self.showPanelVendors(false);
+                        self.BizTypesSelected(biz);
+                        self.loadingData(false);
+                    },
+                    error: function () {
+                        self.loadingData(false);
+                        self.showPanelSpecialities(false);
+                        self.showPanelVendors(false);
+                        self.listSpecialities([]);
+                        self.SpecialitySelected({});
+                        alert("No se encontró datos");
+                    }
+                });
+            }
+
+            self.GetVendorsBySpecialityAndCustomer = function (speciality)
+            {
+                
+                var myUrl = '@Url.Action("GetVendorsBySpecialityAndCustomer", "Ventas")';
+                self.loadingData(true);
+                $.ajax({
+                    type: "GET",
+                    url: myUrl + '?specialityName=' + speciality.specialityName,
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                        self.listVendors(data.vendors);
+                        self.showPanelVendors(true);
+                        self.showPanelSpecialities(false);
+                        self.SpecialitySelected(speciality);
+                        self.loadingData(false);
+                    },
+                    error: function () {
+                        self.loadingData(false);
+                        self.showPanelVendors(false);
+                        self.showPanelSpecialities(false);
+                        self.SpecialitySelected({});
+                        self.listVendors([]);
+                        alert("No se encontró datos");
+                    }
+                });
             }
         }
 
         ko.applyBindings(viewModel);
-
-
     </script>
 }
 

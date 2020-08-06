@@ -15,12 +15,11 @@
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/jquery.pin.js"></script>
     <script src="~/Scripts/moment.js"></script>
-    <script src="~/Scripts/knockout-3.4.2.js" type="text/javascript"></script>
+    <script src="~/Scripts/knockout-3.5.1.js" type="text/javascript"></script>
 
     <script src="~/Scripts/localStorage.js" type="text/javascript"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?u8vidh">
     <script src="http://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
 
     <script src="~/Scripts/jquery.bootpag.js"></script>
@@ -60,26 +59,26 @@
             </div>
         </div>
     </div>
-   
 
 
-   
-        @Html.Partial("_Header")
-        <div class="Cargando" data-bind="visible: loadingData()">
-            <div style="display: flex; align-items: center; height: 100%; width: 100%; position: absolute; left: 48% !important;">
-                <a><i class="fa fa-spinner fa-spin fa-4x fa-fw"></i></a>
-            </div>
+
+
+    @Html.Partial("_Header")
+    <div class="Cargando" data-bind="visible: loadingData()">
+        <div style="display: flex; align-items: center; height: 100%; width: 100%; position: absolute; left: 48% !important;">
+            <a><i class="fa fa-spinner fa-spin fa-4x fa-fw"></i></a>
         </div>
-        <main class="al-main">
-            <div class="al-content">
-                @RenderBody()
-            </div>
-        </main>
-        @Html.Partial("_Footer")
+    </div>
+    <main class="al-main">
+        <div class="al-content">
+            @RenderBody()
+        </div>
+    </main>
+    @Html.Partial("_Footer")
 
-    
-       
-    
+
+
+
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
@@ -89,6 +88,6 @@
     <script src="~/Scripts/messages.es-es.js" type="text/javascript"></script>
     <script src="~/Scripts/moment-with-locales.js" type="text/javascript"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-
+  
 </body>
 </html>

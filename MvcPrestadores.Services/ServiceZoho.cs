@@ -98,7 +98,7 @@ namespace MvcPedidos.Services
             }
             catch (Exception ex)
             {
-                LoggerBase.WriteLog($"{idLog} - GetBizTypes", $"{ex.Serializar()}", TypeError.Error);
+                LoggerBase.WriteLog($"{idLog} - GetBizTypes - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
                 if (tryCallService > LoggerBase.TryCallService)
                     return new List<ReturnBizTypes>();
                 return await GetBizTypes(tryCallService++);
@@ -121,10 +121,56 @@ namespace MvcPedidos.Services
             }
             catch (Exception ex)
             {
-                LoggerBase.WriteLog($"{idLog} - GetSpecialities", $"{ex.Serializar()}", TypeError.Error);
+                LoggerBase.WriteLog($"{idLog} - GetSpecialities - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
                 if (tryCallService > LoggerBase.TryCallService)
                     return new List<ReturnSpeciality>();
                 return await GetSpecialities(idBizType, tryCallService++);
+            }
+        }
+
+        public async Task<List<ReturnVendor>> GetVendorsBySpecialityAndCustomer(string specialityName, string customerId, int tryCallService = 1)
+        {
+            var idLog = GetIdLog();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var request = $"{LoggerBase.UrlBase}{LoggerBase.ApiGetVendorsBySpecialityAndCustomer}?speciality={specialityName}&customerId={customerId}";
+                    LoggerBase.WriteLog($"{idLog} - GetVendorsBySpecialityAndCustomer - tryCallService: {tryCallService}", $"{request}", TypeError.Trace);
+                    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                    return await InterpretarRespuesta<List<ReturnVendor>>(
+                        await client.GetAsync(request), idLog);
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggerBase.WriteLog($"{idLog} - GetVendorsBySpecialityAndCustomer - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
+                if (tryCallService > LoggerBase.TryCallService)
+                    return new List<ReturnVendor>();
+                return await GetVendorsBySpecialityAndCustomer(specialityName, customerId, tryCallService++);
+            }
+        }
+
+        public async Task<List<ReturnItem>> GetItemsByVendor(string vendorId, int tryCallService = 1)
+        {
+            var idLog = GetIdLog();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var request = $"{LoggerBase.UrlBase}{LoggerBase.ApiGetItemsByVendor}?vendorId={vendorId}";
+                    LoggerBase.WriteLog($"{idLog} - GetItemsByVendor - tryCallService: {tryCallService}", $"{request}", TypeError.Trace);
+                    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                    return await InterpretarRespuesta<List<ReturnItem>>(
+                        await client.GetAsync(request), idLog);
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggerBase.WriteLog($"{idLog} - GetItemsByVendor - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
+                if (tryCallService > LoggerBase.TryCallService)
+                    return new List<ReturnItem>();
+                return await GetItemsByVendor(vendorId, tryCallService++);
             }
         }
     }
