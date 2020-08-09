@@ -1,4 +1,6 @@
-﻿namespace MvcPedidos.Entity.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MvcPedidos.Entity.DTO
 {
     public class ReturnItem
     {
@@ -9,8 +11,8 @@
         public object vendorSku { get; set; }
         public string category { get; set; }
         public bool isActive { get; set; }
-        public float price { get; set; }
-        public float taxPercent { get; set; }
+        public string price { get; set; }
+        public string taxPercent { get; set; }
         public object commentsForAgent { get; set; }
 
     }

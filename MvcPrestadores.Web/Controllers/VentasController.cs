@@ -1,5 +1,6 @@
 ﻿using MvcPedidos.Services.Interface;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -71,10 +72,11 @@ namespace MvcPedidos.Web.Controllers
             System.Web.HttpContext.Current.Session["idCustomerSession"] = idCustomerSession;
             System.Web.HttpContext.Current.Session.Timeout = 2160;
 
-            var vendors = await _serviceZoho.GetItemsByVendor(vendorId);
+            var items = await _serviceZoho.GetItemsByVendor(vendorId);
+            items= items.OrderBy(x => x.category).ThenByDescending(x => x.price).ThenBy(x => x.itemDescription).ToList();
             return Json(new
             {
-                vendors
+                items
             },
             JsonRequestBehavior.AllowGet);
         }

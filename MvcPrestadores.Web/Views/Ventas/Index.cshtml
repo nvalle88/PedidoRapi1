@@ -17,44 +17,124 @@
         cursor: pointer;
     }
 
-    .returnArrow:hover {
-        color:blue;
+    .selectedPanelBizTypes:hover {
+        border: 1px solid #fff;
         cursor: pointer;
     }
-    
+
+    .returnArrow:hover {
+        color: blue;
+        cursor: pointer;
+    }
+
+    .testimonial-group > .row {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+        .testimonial-group > .row > .col-xs-4 {
+            display: inline-block;
+            float: none;
+        }
+
+
+    .scrolling-wrapper {
+        overflow-x: auto;
+    }
+
+    body {
+        background-color: #FFF;
+        color: #fff;
+        font-family: 'system-ui';
+    }
+
+    h1 {
+        font-weight: 800;
+        font-size: 3em;
+    }
+
+    .subtitle {
+        font-size: 1.25em;
+        opacity: 0.65;
+    }
+
+    .avatar {
+        vertical-align: middle;
+        display: block;
+        margin: auto;
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+    }
+
+    .imagenSpeciality {
+        vertical-align: middle;
+        display: block;
+        margin: auto;
+        width: 74px;
+        height: 74px;
+        border-radius: 15%;
+    }
+
+
+    .card-block {
+        height: 80px;
+        background-color: #fff;
+        border: none;
+        background: #fff; /*linear-gradient(to right bottom, hsla(200, 90%, 70%, 0.8), hsla(270, 70%, 40%, 0.8));*/
+        background-position: center;
+        background-size: cover;
+        transition: all 0.2s ease-in-out !important;
+        &:hover
+
+    {
+        transform: translateY(-5px);
+        box-shadow: none;
+    }
+    }
 </style>
 
-<div class="row col-sm-12">
-    <div class="list-group col-sm-2"">
-        <div data-bind="template: { foreach: listBizTypes, as: 'biz' }">
+<div class="row">
+    <a href="#" class="cart position-relative d-inline-flex" data-bind="click: showCardShopping" aria-label="View your shopping cart">
+        <i class="fas fa fa-shopping-cart fa-lg"></i>
+        <span class="cart-basket d-flex align-items-center justify-content-center" data-bind="text : listItemsSelected().length">
 
-            <a href="#" class="list-group-item list-group-item-action" data-bind="click:$root.getSpecialities">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"><span data-bind="text:biz.bizName"></span></h5>
-                </div>
-                <img width="64px" height="64px" data-bind="attr:{src: biz.bizImage}" />
-            </a>
+        </span>
+    </a>
+</div>
+
+
+<div class="container-fluid">
+    <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4">
+        <p data-bind="visible: listBizTypes().length ==0" class="align-center"><b>No existen resultados de búsqueda</b></p>
+        <!-- ko foreach: listBizTypes -->
+        <div class="col-sm-1 selectedPanelBizTypes" data-bind="click:$root.getSpecialities">
+            <img data-bind="attr:{src: bizImage}" alt="Avatar" class="avatar">
+            <b style="text-align:center; display: block; margin: auto;"><span data-bind="text:bizName"></span></b>
         </div>
+        <!-- /ko -->
+        <div id="ScrollShowPanelSpecialities"></div>
     </div>
+</div>
+<br />
 
-
-    <div class="col-sm-10" data-bind="visible: showPanelSpecialities()">
+<div class="row col-sm-12">
+    <div class="col-sm-12" data-bind="visible: showPanelSpecialities()">
         <div class="row">
+            <p data-bind="visible: listSpecialities().length ==0" class="align-center"><b>No existen resultados de búsqueda</b></p>
             <!-- ko foreach: listSpecialities -->
-            <div class="col-sm-6 ">
-                <div class="card col-sm-12 selectedPanel" data-bind="click:$root.GetVendorsBySpecialityAndCustomer">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3 align-left">
-                                <span class="text-center"><img width="80px" height="80px" data-bind="attr:{src: specialityImageUrl}" /></span>
+            <div class="col-sm-4">
+                <div class="card selectedPanel" data-bind="click:$root.GetVendorsBySpecialityAndCustomer">
+                    <div class="row card-body">
+                        <div class="col-sm-3 align-left">
+                            <span class="text-center"><img class="imagenSpeciality" data-bind="attr:{src: specialityImageUrl}" /></span>
+                        </div>
+                        <div class="col-sm-9 align-left">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1"><b><span data-bind="text: specialityName"></span></b></h5>
                             </div>
-                            <div class="col-sm-9 align-left">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><b><span data-bind="text: specialityName"></span></b></h5>
-                                </div>
-                                <hr />
-                                <p class="mb-1"><span class="text-center" data-bind="text: specialityDescription"></span></p>
-                            </div>
+                            <hr />
+                            <p class="mb-1"><span class="text-center" data-bind="text: specialityDescription"></span></p>
                         </div>
                     </div>
                 </div>
@@ -64,7 +144,7 @@
     </div>
 
 
-    <div class="col-sm-10" data-bind="visible: showPanelVendors()">
+    <div class="col-sm-12" data-bind="visible: showPanelVendors()">
         <div class="row">
             <div class="col-sm-12">
                 <div class="returnArrow" data-bind="click: returnGetSpecialities"><p><span class="fa fa-arrow-left">&emsp;</span><b><span data-bind="text:SpecialitySelected().specialityName"></span></b> - <span data-bind="text: SpecialitySelected().specialityDescription"></span></p></div>
@@ -73,9 +153,10 @@
         </div>
 
         <div class="row">
+            <p data-bind="visible: listVendors().length ==0" class="align-center"><b>No existen resultados de búsqueda</b></p>
             <!-- ko foreach: listVendors -->
-            <div class="col-sm-4 ">
-                <div class="card col-sm-12 selectedPanel" data-bind="click:$root.GetVendorsBySpecialityAndCustomer">
+            <div class="col-sm-2">
+                <div class="card selectedPanel" data-bind="click:$root.GetItemsByVendor">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12 align-left">
@@ -83,7 +164,43 @@
                                     <h5 class="mb-1"><b><span data-bind="text: VendorName"></span></b></h5>
                                 </div>
                                 <hr />
-                                <p class="mb-1"><span class="text-center" data-bind="text: DeliveryCost"></span></p>
+                                <p class="mb-1"><span class="text-center" data-bind="text:'$ '+ DeliveryCost"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <div class="col-sm-12" data-bind="visible: showPanelItems()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="returnArrow" data-bind="click: returnGetVendors"><p><span class="fa fa-arrow-left">&emsp;</span><b><span data-bind="text:VendorSelected().VendorName"></span></b> - <span data-bind="text: '$ ' +  VendorSelected().DeliveryCost"></span></p></div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="row">
+            <p data-bind="visible: listItems().length ==0" class="align-center"><b>No existen resultados de búsqueda</b></p>
+            <!-- ko foreach: listItems -->
+            <div class="col-sm-2">
+                <div class="card selectedPanel">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 align-left">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <p><span style="font-size:16px" class="text-center" data-bind="text: category"></span></p>
+                                </div>
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><b><span data-bind="text: itemDescription"></span></b></h5>
+                                </div>
+                                <hr />
+                                <p class="mb-1"><span class="text-center" data-bind="text:'$ '+ price"></span></p>
+                                <p class="mb-1"><span class="text-center" data-bind="text: taxPercent + ' %'"></span></p>
+                                <br />
+                                <button data-bind="click:$root.showModalAddItem" class=" col-sm-12 btn btn-primary">Adicionar</button>
                             </div>
                         </div>
                     </div>
@@ -95,6 +212,90 @@
 
 </div>
 
+<div id="myModalAddItem" class="modal">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"><b><span data-bind="text:itemSelected().category"></span></b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12 align-left">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><b><span data-bind="text: itemSelected().itemDescription"></span></b></h5>
+                        </div>
+                        <hr />
+                        <p class="mb-1"><span class="text-center" data-bind="text:'Precio unitario: $ '+ itemSelected().price"></span></p>
+                        <p class="mb-1"><span class="text-center" data-bind="text: itemSelected().taxPercent + ' %'"></span></p>
+                        <br />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label align-left">Cantidad:</label>
+                    <div class="col-sm-8">
+                        <input type="number" id="countItemId" class="form-control" data-bind="value: countItem,event :{keyup:QuitarColorCountItem}" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <hr />
+                <button class="btn btn-principal" title="Adicionar" data-bind="click: addItem">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModalCardShopping" class="modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"><b>Pedidos</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!-- ko foreach: listItemsSelected -->
+                    <div class="col-sm-4">
+                        <div class="card selectedPanel">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12 align-left">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <p><span style="font-size:16px" class="text-center" data-bind="text: item.category"></span></p>
+                                        </div>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1"><b><span data-bind="text: item.itemDescription"></span></b></h5>
+                                        </div>
+                                        <hr />
+                                        <p class="mb-1"><span class="text-center" data-bind="text:'Precio unitario: $ '+ item.price"></span></p>
+                                        <p class="mb-1"><span class="text-center" data-bind="text: item.taxPercent + ' %'"></span></p>
+                                        <p class="mb-1"><span class="text-center" data-bind="text:'Cantidad: '+ count"></span></p>
+                                        <p class="mb-1"><span class="text-center" data-bind="text:'Total: $ '+ count*item.price"></span></p>
+                                        <br />
+                                        <button data-bind="click:$root.deleteItem" class=" col-sm-12 btn btn-primary">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <hr />
+                <button class="btn btn-principal" title="Adicionar" data-bind="click: confirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
     <script>
 
@@ -102,7 +303,14 @@
         var viewModel = new ViewModel();
 
         function ViewModel() {
+
             var self = this;
+
+             $("#countItemId").css({ 'border': '1px solid #cbcbcb' });
+
+            const options = { size: 'sm', backdrop: 'static', keyboard: false };
+             const optionsLg = { size: 'lg', backdrop: 'static', keyboard: false };
+
             window.scrollTo(0, 0);
 
             self.loadingData = ko.observable(false);
@@ -121,11 +329,23 @@
 
             self.showPanelVendors = ko.observable(false);
 
+            self.listItems = ko.observableArray([]);
+
+            self.showPanelItems = ko.observable(false);
+
             self.listSpecialities = ko.observableArray([]);
 
             self.showPanelSpecialities = ko.observable(false);
 
             self.SpecialitySelected = ko.observable({});
+
+            self.VendorSelected = ko.observable({});
+
+            self.listItemsSelected = ko.observableArray([]);
+
+            self.itemSelected = ko.observable({});
+
+            self.countItem = ko.observable(0);
 
             self.getSpecialities = function (biz) {
 
@@ -140,7 +360,11 @@
                         self.listSpecialities(data.bizTypes);
                         self.showPanelSpecialities(true);
                         self.showPanelVendors(false);
+                        self.showPanelItems(false);
                         self.BizTypesSelected(biz);
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: $("#ScrollShowPanelSpecialities").offset().top
+                        }, 1000);
                         self.loadingData(false);
                     },
                     error: function () {
@@ -151,13 +375,13 @@
                         alert("No se encontró datos");
                     }
                 });
-            }
+            };
 
             self.returnGetSpecialities = function () {
 
                 var myUrl = '@Url.Action("GetSpecialities", "Ventas")';
                 self.loadingData(true);
-                var biz=self.BizTypesSelected();
+                var biz = self.BizTypesSelected();
                 $.ajax({
                     type: "GET",
                     url: myUrl + '?idBizType=' + biz.idBizType,
@@ -168,6 +392,9 @@
                         self.showPanelSpecialities(true);
                         self.showPanelVendors(false);
                         self.BizTypesSelected(biz);
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: $("#ScrollShowPanelSpecialities").offset().top
+                        }, 1000);
                         self.loadingData(false);
                     },
                     error: function () {
@@ -179,11 +406,44 @@
                         alert("No se encontró datos");
                     }
                 });
-            }
+            };
 
-            self.GetVendorsBySpecialityAndCustomer = function (speciality)
-            {
-                
+            self.returnGetVendors = function () {
+
+                var myUrl = '@Url.Action("GetVendorsBySpecialityAndCustomer", "Ventas")';
+
+                self.loadingData(true);
+
+                var speciality = self.SpecialitySelected();
+
+                $.ajax({
+                    type: "GET",
+                    url: myUrl + '?specialityName=' + speciality.specialityName,
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+
+                        self.listVendors(data.vendors);
+                        self.showPanelVendors(true);
+                        self.showPanelSpecialities(false);
+                        self.showPanelItems(false);
+                        self.SpecialitySelected(speciality);
+                        self.loadingData(false);
+                    },
+                    error: function () {
+                        self.loadingData(false);
+                        self.showPanelItems(false);
+                        self.showPanelVendors(false);
+                        self.showPanelSpecialities(false);
+                        self.SpecialitySelected({});
+                        self.listVendors([]);
+                        alert("No se encontró datos");
+                    }
+                });
+            };
+
+            self.GetVendorsBySpecialityAndCustomer = function (speciality) {
+
                 var myUrl = '@Url.Action("GetVendorsBySpecialityAndCustomer", "Ventas")';
                 self.loadingData(true);
                 $.ajax({
@@ -207,7 +467,110 @@
                         alert("No se encontró datos");
                     }
                 });
-            }
+            };
+
+            self.GetItemsByVendor = function (vendor) {
+                var myUrl = '@Url.Action("GetItemsByVendor", "Ventas")';
+
+                self.loadingData(true);
+
+                $.ajax({
+                    type: "GET",
+                    url: myUrl + '?vendorId=' + vendor.VedorId,
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                        self.listItems(data.items);
+                        self.showPanelItems(true);
+                        self.showPanelVendors(false);
+                        self.showPanelSpecialities(false);
+                        self.VendorSelected(vendor);
+                        self.loadingData(false);
+                    },
+                    error: function () {
+                        self.loadingData(false);
+                        self.showPanelVendors(false);
+                        self.showPanelSpecialities(false);
+                        self.VendorSelected({});
+                        self.listVendors([]);
+                        alert("No se encontró datos");
+                    }
+                });
+            };
+
+            self.showModalAddItem = function (item) {
+                self.itemSelected(item);
+                self.countItem(0);
+                self.QuitarColorCountItem();
+                $('#myModalAddItem').modal(options);
+                $('#myModalAddItem').modal('show');
+            };
+
+            self.addItem = function () {
+                var count = self.countItem();
+                var sItem = self.itemSelected();
+                if (count <= 0) {
+                    self.MostrarColorCountItem();
+                    return;
+                }
+
+                var guid = self.createGuid();
+                self.listItemsSelected.push({id:guid,count: count, item: sItem });
+                $('#myModalAddItem').modal('hide');
+            };
+
+            self.showCardShopping  = function () {
+                 $('#myModalCardShopping').modal(optionsLg);
+                $('#myModalCardShopping').modal('show');
+            };
+
+            self.deleteItem = function (item) {
+
+                var lista = [];
+                for (var i = 0; i < self.listItemsSelected().length; i++){
+                    if (self.listItemsSelected()[i].id == item.id) {
+                        self.listItemsSelected().splice(i, 1);
+                    };
+                };
+                var lista = self.listItemsSelected();
+
+                self.listItemsSelected(lista);
+
+                if (self.listItemsSelected().length == 0) {
+                    $('#myModalCardShopping').modal('hide');
+                };
+            };
+
+            self.confirm = function () {
+
+                for (var i = 0; i < self.listItemsSelected().length; i++){
+                    alert(self.listItemsSelected()[i].id);
+                };
+                
+            };
+
+            self.createGuid = function createGuid() {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                    var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+            };
+
+            self.MostrarColorCountItem = function () {
+                self.agregarColorBorderCountItem();
+            };
+
+            self.QuitarColorCountItem = function () {
+                self.quitarColorBorderCountItem();
+            };
+
+            self.agregarColorBorderCountItem = function () {
+                $("#countItemId").css({ 'border': '1px solid red' });
+            };
+
+            self.quitarColorBorderCountItem = function () {
+                $("#countItemId").css({ 'border': '1px solid #cbcbcb' });
+            };
         }
 
         ko.applyBindings(viewModel);
