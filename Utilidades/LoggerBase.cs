@@ -46,6 +46,9 @@ namespace Utilidades
 
         public static readonly string ApiGetVendorsBySpecialityAndCustomer;
 
+        public static readonly string ApiProcessOrder;
+
+
 
         #endregion
 
@@ -60,6 +63,7 @@ namespace Utilidades
                 ApiGetSpecialities = System.Configuration.ConfigurationManager.AppSettings["ApiGetSpecialities"];
                 ApiGetItemsByVendor = System.Configuration.ConfigurationManager.AppSettings["ApiGetItemsByVendor"];
                 ApiGetVendorsBySpecialityAndCustomer = System.Configuration.ConfigurationManager.AppSettings["ApiGetVendorsBySpecialityAndCustomer"];
+                ApiProcessOrder = System.Configuration.ConfigurationManager.AppSettings["ApiProcessOrder"];
 
                 var number = System.Configuration.ConfigurationManager.AppSettings["TryCallService"];
 

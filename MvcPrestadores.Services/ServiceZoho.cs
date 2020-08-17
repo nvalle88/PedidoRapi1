@@ -1,5 +1,6 @@
 ﻿using MvcPedidos.Entity.DTO;
 using MvcPedidos.Services.Interface;
+using MvcPrestadores.Entity.DTO;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -71,8 +72,6 @@ namespace MvcPedidos.Services
             }
         }
 
-        //Obtiene la información completa del prestador médico según su código
-
         private string ToQueryString(NameValueCollection nvc)
         {
             var array = (from key in nvc.AllKeys
@@ -82,7 +81,7 @@ namespace MvcPedidos.Services
             return "?" + string.Join("&", array);
         }
 
-        public async Task<List<ReturnBizTypes>> GetBizTypes(int tryCallService = 1)
+        public async Task<List<ReturnBizTypes>> GetBizTypes(int tryCallService)
         {
             var idLog = GetIdLog();
             try
@@ -101,11 +100,13 @@ namespace MvcPedidos.Services
                 LoggerBase.WriteLog($"{idLog} - GetBizTypes - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
                 if (tryCallService > LoggerBase.TryCallService)
                     return new List<ReturnBizTypes>();
-                return await GetBizTypes(tryCallService++);
+
+                tryCallService += 1;
+                return await GetBizTypes(tryCallService);
             }
         }
 
-        public async Task<List<ReturnSpeciality>> GetSpecialities(int idBizType, int tryCallService = 1)
+        public async Task<List<ReturnSpeciality>> GetSpecialities(int idBizType, int tryCallService)
         {
             var idLog = GetIdLog();
             try
@@ -124,11 +125,14 @@ namespace MvcPedidos.Services
                 LoggerBase.WriteLog($"{idLog} - GetSpecialities - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
                 if (tryCallService > LoggerBase.TryCallService)
                     return new List<ReturnSpeciality>();
-                return await GetSpecialities(idBizType, tryCallService++);
+
+
+                tryCallService += 1;
+                return await GetSpecialities(idBizType, tryCallService);
             }
         }
 
-        public async Task<List<ReturnVendor>> GetVendorsBySpecialityAndCustomer(string specialityName, string customerId, int tryCallService = 1)
+        public async Task<List<ReturnVendor>> GetVendorsBySpecialityAndCustomer(string specialityName, string customerId, int tryCallService)
         {
             var idLog = GetIdLog();
             try
@@ -147,11 +151,13 @@ namespace MvcPedidos.Services
                 LoggerBase.WriteLog($"{idLog} - GetVendorsBySpecialityAndCustomer - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
                 if (tryCallService > LoggerBase.TryCallService)
                     return new List<ReturnVendor>();
-                return await GetVendorsBySpecialityAndCustomer(specialityName, customerId, tryCallService++);
+
+                tryCallService += 1;
+                return await GetVendorsBySpecialityAndCustomer(specialityName, customerId, tryCallService);
             }
         }
 
-        public async Task<List<ReturnItem>> GetItemsByVendor(string vendorId, int tryCallService = 1)
+        public async Task<List<ReturnItem>> GetItemsByVendor(string vendorId, int tryCallService)
         {
             var idLog = GetIdLog();
             try
@@ -170,7 +176,34 @@ namespace MvcPedidos.Services
                 LoggerBase.WriteLog($"{idLog} - GetItemsByVendor - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
                 if (tryCallService > LoggerBase.TryCallService)
                     return new List<ReturnItem>();
+
+                tryCallService += 1;
                 return await GetItemsByVendor(vendorId, tryCallService++);
+            }
+        }
+
+        public async Task<bool> ProcessOrder(Order order, int tryCallService)
+        {
+            var idLog = GetIdLog();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var request = $"{LoggerBase.UrlBase}{LoggerBase.ApiProcessOrder}";
+                    LoggerBase.WriteLog($"{idLog} - ProcessOrder - tryCallService: {tryCallService}", $"{request} : order: {order.Serializar()}", TypeError.Trace);
+                    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                    return await InterpretarRespuesta<bool>(
+                        await client.GetAsync(request), idLog);
+                }
+            }
+            catch (Exception ex)
+            {
+                LoggerBase.WriteLog($"{idLog} - ProcessOrder - tryCallService: {tryCallService}", $"{ex.Serializar()}", TypeError.Error);
+                if (tryCallService > LoggerBase.TryCallService)
+                    return false;
+
+                tryCallService += 1;
+                return await ProcessOrder(order, tryCallService);
             }
         }
     }

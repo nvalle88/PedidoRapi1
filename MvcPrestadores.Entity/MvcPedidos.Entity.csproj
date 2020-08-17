@@ -31,6 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DTO\Order.cs" />
+    <Compile Include="DTO\OrderDetails.cs" />
     <Compile Include="DTO\ReturnItem.cs" />
     <Compile Include="DTO\ReturnSpeciality.cs" />
     <Compile Include="DTO\ReturnBizTypes.cs" />

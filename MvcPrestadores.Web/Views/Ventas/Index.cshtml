@@ -181,39 +181,50 @@
             </div>
             <hr />
         </div>
-
-        <div class="row">
-            <p data-bind="visible: listItems().length ==0" class="align-center"><b>No existen resultados de búsqueda</b></p>
-            <!-- ko foreach: listItems -->
-            <div class="col-sm-2">
-                <div class="card selectedPanel">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 align-left">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <p><span style="font-size:16px" class="text-center" data-bind="text: category"></span></p>
+        <!-- ko foreach: listItems -->
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-bind="attr: { id: '#collapsible' + id , href : '#collapsible'+ id , 'data-parent': '#collapsible' + id,'data-toggle':'collapse' }">
+                    <span class="fa fa-arrow-right" data-bind="text:'  '+ category"></span>
+                </a>
+            </div>
+            <div data-bind="attr: { id: 'collapsible' + id}"  class="collapse" data-parent="#accordion">
+                <br />
+                <div class="container">
+                    <div class="row">
+                        <!-- ko foreach: items -->
+                        <div class="col-sm-2">
+                            <div class="card selectedPanel">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 align-left">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><b><span data-bind="text: itemDescription"></span></b></h5>
+                                            </div>
+                                            <hr />
+                                            <p class="mb-1"><span class="text-center" data-bind="text:'$ '+ price"></span></p>
+                                            <p class="mb-1"><span class="text-center" data-bind="text: taxPercent + ' %'"></span></p>
+                                            <br />
+                                            <button data-bind="click:$root.showModalAddItem" class=" col-sm-12 btn btn-primary">Adicionar</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1"><b><span data-bind="text: itemDescription"></span></b></h5>
-                                </div>
-                                <hr />
-                                <p class="mb-1"><span class="text-center" data-bind="text:'$ '+ price"></span></p>
-                                <p class="mb-1"><span class="text-center" data-bind="text: taxPercent + ' %'"></span></p>
-                                <br />
-                                <button data-bind="click:$root.showModalAddItem" class=" col-sm-12 btn btn-primary">Adicionar</button>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>
-            <!-- /ko -->
         </div>
+        <!-- /ko -->
+
+        
     </div>
 
 </div>
 
 <div id="myModalAddItem" class="modal">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel"><b><span data-bind="text:itemSelected().category"></span></b></h4>
@@ -239,6 +250,13 @@
                         <input type="number" id="countItemId" class="form-control" data-bind="value: countItem,event :{keyup:QuitarColorCountItem}" />
                     </div>
                 </div>
+                <text class="form-group row">
+                    <label class="col-sm-4 col-form-label align-left">Descripci&oacute;n:</label>
+                    <text class="col-sm-8">
+                        <textarea rows="50" class="form-control" data-bind="value: descriptionItem"></textarea>
+                        @*<textarea type="text" id="descriptionItemId" class="form-control" data-bind="value: descriptionItem" />*@
+                    </text>
+                </text>
             </div>
             <div class="modal-footer">
                 <hr />
@@ -276,7 +294,7 @@
                                         <p class="mb-1"><span class="text-center" data-bind="text:'Precio unitario: $ '+ item.price"></span></p>
                                         <p class="mb-1"><span class="text-center" data-bind="text: item.taxPercent + ' %'"></span></p>
                                         <p class="mb-1"><span class="text-center" data-bind="text:'Cantidad: '+ count"></span></p>
-                                        <p class="mb-1"><span class="text-center" data-bind="text:'Total: $ '+ count*item.price"></span></p>
+                                        <p class="mb-1"><span class="text-center" data-bind="text:'Total: $ '+ totalAmount"></span></p>
                                         <br />
                                         <button data-bind="click:$root.deleteItem" class=" col-sm-12 btn btn-primary">Eliminar</button>
                                     </div>
@@ -289,7 +307,7 @@
             </div>
             <div class="modal-footer">
                 <hr />
-                <button class="btn btn-principal" title="Adicionar" data-bind="click: confirm">Confirmar</button>
+                <button id="processOrderIdButton" class="btn btn-principal" title="Confirmar" data-bind="click: processOrder">Confirmar</button>
             </div>
         </div>
     </div>
@@ -346,6 +364,7 @@
             self.itemSelected = ko.observable({});
 
             self.countItem = ko.observable(0);
+            self.descriptionItem = ko.observable("");
 
             self.getSpecialities = function (biz) {
 
@@ -470,6 +489,7 @@
             };
 
             self.GetItemsByVendor = function (vendor) {
+
                 var myUrl = '@Url.Action("GetItemsByVendor", "Ventas")';
 
                 self.loadingData(true);
@@ -480,7 +500,7 @@
                     contentType: "application/json; charset=utf-8",
                     datatype: "json",
                     success: function (data) {
-                        self.listItems(data.items);
+                        self.listItems(data.itemsResult);
                         self.showPanelItems(true);
                         self.showPanelVendors(false);
                         self.showPanelSpecialities(false);
@@ -501,21 +521,25 @@
             self.showModalAddItem = function (item) {
                 self.itemSelected(item);
                 self.countItem(0);
+                self.descriptionItem("");
                 self.QuitarColorCountItem();
-                $('#myModalAddItem').modal(options);
+                 $('#myModalAddItem').modal(optionsLg);
                 $('#myModalAddItem').modal('show');
             };
 
             self.addItem = function () {
                 var count = self.countItem();
+                var description = self.descriptionItem();
                 var sItem = self.itemSelected();
                 if (count <= 0) {
                     self.MostrarColorCountItem();
                     return;
                 }
 
+
+                var totalAmount = (count * sItem.price).toFixed(2);
                 var guid = self.createGuid();
-                self.listItemsSelected.push({id:guid,count: count, item: sItem });
+                self.listItemsSelected.push({id:guid,count: count, item: sItem,description:description,totalAmount:totalAmount});
                 $('#myModalAddItem').modal('hide');
             };
 
@@ -541,11 +565,60 @@
                 };
             };
 
-            self.confirm = function () {
+            self.ConformOrder = function () {
 
-                for (var i = 0; i < self.listItemsSelected().length; i++){
-                    alert(self.listItemsSelected()[i].id);
+                var listOrder = [];
+                for (var i = 0; i < self.listItemsSelected().length; i++) {
+                    listOrder.push(
+                        {
+                            itemId: self.listItemsSelected()[i].item.itemId,
+                            vendorId: self.listItemsSelected()[i].item.vendorId,
+                            count: self.listItemsSelected()[i].count,
+                            description: self.listItemsSelected()[i].description,
+                        });
                 };
+
+                return listOrder;
+            };
+
+            self.processOrder = function () {
+                $("#processOrderIdButton").prop("disabled", true);
+                $("#processOrderIdButton").removeClass('btn btn-principal');
+                $("#processOrderIdButton").addClass('spinner-border text-primary');
+                $("#processOrderIdButton").html('');
+                
+                var myUrl = '@Url.Action("ProcessOrder", "Ventas")';
+                self.loadingData(true);
+                var details = JSON.stringify(self.ConformOrder());
+                $.ajax({
+                    type: "POST",
+                    url: myUrl,
+                    data: details,
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                         self.loadingData(false);
+                        if (data.idProcessed == false) {
+                            
+                            $("#processOrderIdButton").removeClass('spinner-border text-primary');
+                            $("#processOrderIdButton").addClass('btn btn-principal');
+                            $("#processOrderIdButton").html('Confirmar');
+                            $("#processOrderIdButton").prop("disabled", false);
+                            alert("La orden no ha sido procesada, intente nuevamente por favor");
+                            return;
+                        };
+                        if (data.idProcessed == true) {
+
+                            var initUrl = '@Url.Action("Index", "Home")';
+                            window.location.href = initUrl+'?id='+ data.id;
+                            return;
+                        };
+                    },
+                    error: function () {
+                        self.loadingData(false);
+                        alert("Existió error en la comunicación con el servidor, intente nuevamente por favor");
+                    }
+                });
                 
             };
 
