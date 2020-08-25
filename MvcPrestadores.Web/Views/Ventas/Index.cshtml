@@ -164,7 +164,7 @@
                                     <h5 class="mb-1"><b><span data-bind="text: VendorName"></span></b></h5>
                                 </div>
                                 <hr />
-                                <p class="mb-1"><span class="text-center" data-bind="text:'$ '+ DeliveryCost"></span></p>
+                                <p class="mb-1"><span class="text-center fa fa fa-motorcycle" data-bind="text:'     $ '+ DeliveryCost"></span></p>
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
     <div class="col-sm-12" data-bind="visible: showPanelItems()">
         <div class="row">
             <div class="col-sm-12">
-                <div class="returnArrow" data-bind="click: returnGetVendors"><p><span class="fa fa-arrow-left">&emsp;</span><b><span data-bind="text:VendorSelected().VendorName"></span></b> - <span data-bind="text: '$ ' +  VendorSelected().DeliveryCost"></span></p></div>
+                <div class="returnArrow" data-bind="click: returnGetVendors"><p><span class="fa fa-arrow-left">&emsp;</span><b><span data-bind="text:VendorSelected().VendorName"></span></b> - <span class="fa fa fa-motorcycle" data-bind="text: '    $ ' +  VendorSelected().DeliveryCost"></span></p></div>
             </div>
             <hr />
         </div>
@@ -240,7 +240,6 @@
                         </div>
                         <hr />
                         <p class="mb-1"><span class="text-center" data-bind="text:'Precio unitario: $ '+ itemSelected().price"></span></p>
-                        <p class="mb-1"><span class="text-center" data-bind="text: itemSelected().taxPercent + ' %'"></span></p>
                         <br />
                     </div>
                 </div>
@@ -292,7 +291,6 @@
                                         </div>
                                         <hr />
                                         <p class="mb-1"><span class="text-center" data-bind="text:'Precio unitario: $ '+ item.price"></span></p>
-                                        <p class="mb-1"><span class="text-center" data-bind="text: item.taxPercent + ' %'"></span></p>
                                         <p class="mb-1"><span class="text-center" data-bind="text: 'Descripción: '+ description"></span></p>
                                         <p class="mb-1"><span class="text-center" data-bind="text:'Cantidad: '+ count"></span></p>
                                         <p class="mb-1"><span class="text-center" data-bind="text:'Total: $ '+ totalAmount"></span></p>
