@@ -1,12 +1,14 @@
 ﻿using MvcPedidos.Entity.DTO;
 using MvcPedidos.Services.Interface;
 using MvcPrestadores.Entity.DTO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Utilidades;
@@ -190,10 +192,16 @@ namespace MvcPedidos.Services
                 using (var client = new HttpClient())
                 {
                     var request = $"{LoggerBase.UrlBase}{LoggerBase.ApiProcessOrder}";
+                    var requestObject = JsonConvert.SerializeObject(order);
+                    var content = new StringContent(requestObject, Encoding.UTF8, "application/json");
                     LoggerBase.WriteLog($"{idLog} - ProcessOrder - tryCallService: {tryCallService}", $"{request} : order: {order.Serializar()}", TypeError.Trace);
                     System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-                    return await InterpretarRespuesta<bool>(
-                        await client.GetAsync(request), idLog);
+
+                    var response = await client.PostAsync(request, content);
+                    LoggerBase.WriteLog(GetType().ToString(),
+                           $"{idLog} - RespuestaServicio: ({response.Serializar()})",
+                           TypeError.Trace);
+                    return response.IsSuccessStatusCode;
                 }
             }
             catch (Exception ex)

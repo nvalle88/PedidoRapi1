@@ -203,7 +203,7 @@
                                             </div>
                                             <hr />
                                             <p class="mb-1"><span class="text-center" data-bind="text:'$ '+ price"></span></p>
-                                            <p class="mb-1"><span class="text-center" data-bind="text: taxPercent + ' %'"></span></p>
+                                            @*<p class="mb-1"><span class="text-center" data-bind="text: taxPercent + ' %'"></span></p>*@
                                             <br />
                                             <button data-bind="click:$root.showModalAddItem" class=" col-sm-12 btn btn-primary">Adicionar</button>
                                         </div>
@@ -293,6 +293,7 @@
                                         <hr />
                                         <p class="mb-1"><span class="text-center" data-bind="text:'Precio unitario: $ '+ item.price"></span></p>
                                         <p class="mb-1"><span class="text-center" data-bind="text: item.taxPercent + ' %'"></span></p>
+                                        <p class="mb-1"><span class="text-center" data-bind="text: 'Descripción: '+ description"></span></p>
                                         <p class="mb-1"><span class="text-center" data-bind="text:'Cantidad: '+ count"></span></p>
                                         <p class="mb-1"><span class="text-center" data-bind="text:'Total: $ '+ totalAmount"></span></p>
                                         <br />
@@ -582,13 +583,11 @@
             };
 
             self.processOrder = function () {
-                $("#processOrderIdButton").prop("disabled", true);
-                $("#processOrderIdButton").removeClass('btn btn-principal');
-                $("#processOrderIdButton").addClass('spinner-border text-primary');
-                $("#processOrderIdButton").html('');
+                $('#myModalCardShopping').modal('hide');
+                self.loadingData(true);
                 
                 var myUrl = '@Url.Action("ProcessOrder", "Ventas")';
-                self.loadingData(true);
+               
                 var details = JSON.stringify(self.ConformOrder());
                 $.ajax({
                     type: "POST",
@@ -596,27 +595,31 @@
                     data: details,
                     contentType: "application/json; charset=utf-8",
                     datatype: "json",
+                    timeout:120000,
                     success: function (data) {
-                         self.loadingData(false);
+                        
                         if (data.idProcessed == false) {
                             
-                            $("#processOrderIdButton").removeClass('spinner-border text-primary');
-                            $("#processOrderIdButton").addClass('btn btn-principal');
-                            $("#processOrderIdButton").html('Confirmar');
-                            $("#processOrderIdButton").prop("disabled", false);
                             alert("La orden no ha sido procesada, intente nuevamente por favor");
+                            self.loadingData(false);
+                            $('#myModalCardShopping').modal(optionsLg);
+                            $('#myModalCardShopping').modal('show');
                             return;
                         };
                         if (data.idProcessed == true) {
-
+                            alert("La orden fue procesada.");
                             var initUrl = '@Url.Action("Index", "Home")';
                             window.location.href = initUrl+'?id='+ data.id;
                             return;
                         };
                     },
                     error: function () {
-                        self.loadingData(false);
+                       
                         alert("Existió error en la comunicación con el servidor, intente nuevamente por favor");
+                        self.loadingData(false);
+                        $('#myModalCardShopping').modal(optionsLg);
+                        $('#myModalCardShopping').modal('show');
+
                     }
                 });
                 
