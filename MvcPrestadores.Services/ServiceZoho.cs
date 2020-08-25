@@ -196,12 +196,7 @@ namespace MvcPedidos.Services
                     var content = new StringContent(requestObject, Encoding.UTF8, "application/json");
                     LoggerBase.WriteLog($"{idLog} - ProcessOrder - tryCallService: {tryCallService}", $"{request} : order: {order.Serializar()}", TypeError.Trace);
                     System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-
-                    var response = await client.PostAsync(request, content);
-                    LoggerBase.WriteLog(GetType().ToString(),
-                           $"{idLog} - RespuestaServicio: ({response.Serializar()})",
-                           TypeError.Trace);
-                    return response.IsSuccessStatusCode;
+                    return await InterpretarRespuesta<bool>(await client.PostAsync(request, content),idLog);
                 }
             }
             catch (Exception ex)
